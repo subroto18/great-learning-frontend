@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Bar } from "react-chartjs-2";
+import React, { useState, useEffect, useRef } from "react";
+import { Bar, Line, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,29 +8,50 @@ import {
   Title,
   Tooltip,
   Legend,
+  ArcElement,
+  PointElement,
+  LineElement,
 } from "chart.js";
 import zoomPlugin from "chartjs-plugin-zoom";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
 import Error from "./Error";
+import { BAR, LINE, PIE } from "../../utils/helper";
 
 // Register necessary ChartJS components and the zoom plugin
 ChartJS.register(
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   BarElement,
   Title,
   Tooltip,
   Legend,
-  zoomPlugin
+  zoomPlugin,
+  ArcElement
 );
 
 const Common = () => {
+  const chartRef = useRef(null);
+
   const {
     loading,
     data: chartResponse,
     error,
+    activeChart,
   } = useSelector((store) => store.chart);
+
+  useEffect(() => {
+    return () => {
+      // Destroy the chart instance when the component unmounts
+      if (chartRef.current && chartRef.current.chartInstance) {
+        chartRef.current.chartInstance.destroy();
+      }
+    };
+  }, []);
+
+  console.log(chartRef, "chartRef");
 
   const postMap = {};
 
@@ -99,9 +120,31 @@ const Common = () => {
     },
   };
 
+  const data = {
+    labels: ["January", "February", "March", "April", "May"], // X-axis labels
+    datasets: [
+      {
+        label: "Monthly Sales",
+        data: [30, 45, 60, 50, 80], // Y-axis data
+        borderColor: "rgb(75, 192, 192)", // Line color
+        backgroundColor: "rgba(75, 192, 192, 0.2)", // Background color under the line
+        fill: true,
+        tension: 0.4, // Makes the line curve
+      },
+    ],
+  };
+
   return (
     <div>
-      <Bar data={chartData} options={options} />
+      {activeChart === PIE && (
+        <Pie data={chartData} options={options} ref={chartRef} />
+      )}
+      {activeChart === BAR && (
+        <Bar data={chartData} options={options} ref={chartRef} />
+      )}
+      {activeChart === LINE && (
+        <Line data={chartData} options={options} ref={chartRef} />
+      )}
     </div>
   );
 };

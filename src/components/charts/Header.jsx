@@ -12,9 +12,9 @@ const Header = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-4 shadow-md flex justify-between items-center sticky top-0 z-50">
+    <div className="bg-gray-100 p-4 shadow-md md:flex justify-between items-center sticky top-0 z-50">
       <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 mt-2 md:mt-0">
         <button
           className={`px-4 py-2 rounded ${
             activeChart === BAR
