@@ -12,6 +12,7 @@ import {
 import zoomPlugin from "chartjs-plugin-zoom";
 import { useSelector } from "react-redux";
 import Loader from "./Loader";
+import Error from "./Error";
 
 // Register necessary ChartJS components and the zoom plugin
 ChartJS.register(
@@ -29,26 +30,24 @@ const Common = () => {
     loading,
     data: chartResponse,
     error,
-    active,
   } = useSelector((store) => store.chart);
 
   const postMap = {};
 
   chartResponse.forEach((comment) => {
-    const key = comment.email;
+    const key = comment.postId;
     const value = `${comment.email}`;
     postMap[key] = value;
   });
 
   if (loading) return <Loader />;
 
+  if (error) return <Error data={error} />;
+
   // Prepare the data for the chart
   const labels = Object.keys(postMap);
-  const values = Object.values(postMap);
 
   const counts = Object.values(postMap).map((values) => values.length); // Count how many emails-titles exist per postId
-
-  console.log(values, "values");
 
   const chartData = {
     labels: labels, // X-axis labels
