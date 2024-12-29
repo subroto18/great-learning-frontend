@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -118,20 +118,6 @@ const Common = () => {
         mode: "xy", // Allow zoom on both axes
       },
     },
-  };
-
-  const data = {
-    labels: ["January", "February", "March", "April", "May"], // X-axis labels
-    datasets: [
-      {
-        label: "Monthly Sales",
-        data: [30, 45, 60, 50, 80], // Y-axis data
-        borderColor: "rgb(75, 192, 192)", // Line color
-        backgroundColor: "rgba(75, 192, 192, 0.2)", // Background color under the line
-        fill: true,
-        tension: 0.4, // Makes the line curve
-      },
-    ],
   };
 
   return (

@@ -1,27 +1,14 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import loginValidationSchema from "../../validation/login";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoginFormData } from "../../slices/authSlice";
-import useLocalStorage from "../../useHook/useLocalStorage";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { encodeJWT } from "../../utils/jwt";
 import Input from "../InputFields/Input";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { loginFormData } = useSelector((store) => store.auth);
-  const dispatch = useDispatch();
+
   const navigate = useNavigate();
-
-  const handleFormChangeData = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    // update form data
-
-    dispatch(setLoginFormData({ ...loginFormData, [name]: value }));
-  };
 
   const handleSubmit = (values) => {
     let crediential = JSON.parse(localStorage.getItem("auth"));

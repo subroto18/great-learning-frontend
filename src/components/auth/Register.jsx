@@ -1,11 +1,8 @@
-import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import loginValidationSchema from "../../validation/login";
-import { useDispatch, useSelector } from "react-redux";
-import { setLoginFormData } from "../../slices/authSlice";
-import useLocalStorage from "../../useHook/useLocalStorage";
+import { Formik, Form } from "formik";
+
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { encodeJWT } from "../../utils/jwt";
+
 import Input from "../InputFields/Input";
 import registerValidationSchema from "../../validation/register";
 

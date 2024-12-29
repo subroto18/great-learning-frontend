@@ -1,4 +1,3 @@
-import BarChart from "../components/charts/BarChart";
 import Home from "../components/home/Home";
 
 const HomePage = () => {
