@@ -1,164 +1,167 @@
-# Project: Chart Visualization Dashboard
+# React Chart App
 
 ## Overview
 
-The **Chart Visualization Dashboard** is a React-based project designed to assess influencer data through visualized charts. This project utilizes `react-chartjs-2` for creating dynamic and responsive charts, with features such as user authentication, API integration, and reusable components for modular development.
+This project is a React-based application built using Vite and Tailwind CSS for displaying various types of charts such as bar charts, line charts, and pie charts. It features token-based authentication, requiring users to register and log in to access the dashboard. The app demonstrates best practices in state management, API handling, and UI responsiveness.
 
 ## Features
 
-- **Dynamic Chart Visualization:** Powered by `react-chartjs-2`, offering responsive and customizable charts.
-- **API Integration:** Custom API handler with interceptor middleware ensures robust API communication.
-- **Authentication System:**
-  - User registration and login functionality.
-  - Authentication implemented using local storage.
-  - Auth-based dashboard accessible only to registered users.
-- **State Management:** Managed globally using Redux.
-- **Routing:** Implemented with the latest version of React Router.
-- **Code Reusability:** Developed reusable components and custom hooks for efficient code management.
-- **Protected Routes:** Implemented using the HOC (Higher-Order Component) pattern.
+1. **Authentication:**
+
+   - Token-based authentication.
+   - Registration and login system.
+   - Protected routes to restrict access to the dashboard for unauthenticated users.
+
+2. **Chart Display:**
+
+   - Visualization of data using bar charts, line charts, and pie charts.
+   - Dynamic rendering of charts using `react-chartjs-2`.
+
+3. **Form Handling:**
+
+   - User-friendly forms for registration and login.
+   - Form validation with `Formik` and `Yup`.
+
+4. **Error and Loading Management:**
+
+   - Proper handling of loading and error states.
+   - User feedback with `react-toastify` for alerts and notifications.
+
+5. **Routing:**
+
+   - `createBrowserRouter` for routing.
+   - 404 page for invalid URLs.
+
+6. **API Handling:**
+
+   - API calls managed with `axios`.
+   - Custom Axios instance for centralized API handling.
+   - Middleware for intercepting API requests and responses.
+
+7. **Code Architecture:**
+
+   - High-order components (HOCs) for reusable logic.
+   - Custom hooks (e.g., for data fetching and form handling).
+   - Organized and scalable folder structure.
+
+8. **Code Architecture:**
+
+Improved visibility in search engine results and social platforms.
 
 ## Tech Stack
 
 - **Frontend Framework:** React
-- **Chart Library:** `react-chartjs-2`
+- **Build Tool:** Vite
+- **UI Styling:** Tailwind CSS
 - **State Management:** Redux
-- **Routing:** React Router (latest version)
-- **Authentication:** Local storage-based implementation
-- **Middleware:** API interceptor
-- **Code Patterns:** Custom hooks, reusable components, HOC
+- **Charting Library:** react-chartjs-2
+- **Form Validation:** Formik and Yup
+- **API Handling:** Axios with a custom instance and middleware
+- **Routing:** `createBrowserRouter` from React Router
+- **Notifications:** react-toastify
 
-## Installation
+## Project Structure
 
-1. Clone the repository:
+```
+project-root
+├── src
+│   ├── assets/           # Static files
+│   ├── components/       # Reusable UI components
+│   ├── router/           # All route service
+│   ├── slices/           # Redux slices
+│   ├── useHook/            # Custom React hooks
+│   ├── pages/            # Pages (e.g., Login, Register, Dashboard, 404)
+│   ├── services/         # API service files
+│   ├── styles/           # Tailwind CSS styles
+│   ├── utils/            # Utility functions
+│   ├── Layout.jsx        # Parent component
+│   ├── ProtectedRoute.jsx  # All protected files
+│   ├── App.jsx           # Root component
+│   ├── main.jsx          # Entry point
+│   └── router.js         # Application routing
+|   ── store.js           # Redux store
+├── public/               # Public assets
+
+├── .env                  # Environment variables
+├── package.json          # Dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+└── vite.config.js        # Vite configuration
+```
+
+## Installation and Setup
+
+1. **Clone the repository:**
 
    ```bash
-   git clone <repository_url>
+   git clone <repository-url>
+   cd project-root
    ```
 
-2. Navigate to the project directory:
-
-   ```bash
-   cd chart-visualization-dashboard
-   ```
-
-3. Install dependencies:
+2. **Install dependencies:**
 
    ```bash
    npm install
    ```
 
-4. Start the development server:
-   ```bash
-   npm start
+3. **Set up environment variables:**
+   Create a `.env` file in the root directory and configure the following variables:
+
+   ```env
+   VITE_API_BASE_URL=<Your API Base URL>
    ```
 
-## Project Structure
+4. **Run the application:**
 
-```
-chart-visualization-dashboard/
-|-- src/
-    |-- components/        # Reusable components
-    |-- hooks/             # Custom hooks
-    |-- store/             # Redux store and slices
-    |-- api/               # Custom API handler and interceptors
-    |-- pages/             # Page components (e.g., Dashboard, Login, Register)
-    |-- routes/            # Route configuration and HOCs for protected routes
-    |-- styles/            # CSS/SCSS styles
-    |-- App.js             # Main application file
-    |-- index.js           # Entry point
-```
+   ```bash
+   npm run dev
+   ```
 
-## Features Breakdown
-
-### Chart Visualization
-
-- Uses `react-chartjs-2` for creating charts such as bar, line, and pie charts.
-- Responsive and interactive.
-- Fetches data from APIs using the custom API handler.
-
-### Authentication
-
-- User registration and login with form validation.
-- Stores authentication tokens in local storage.
-- Protects dashboard routes using HOC.
-
-### API Handling
-
-- Custom API handler ensures centralized API logic.
-- Interceptor middleware for adding headers and handling errors.
-
-### State Management
-
-- Managed with Redux for consistent state across components.
-- Integrated with custom hooks for better readability and reusability.
-
-### Routing
-
-- Configured with the latest React Router.
-- Protected routes ensure only authenticated users can access certain pages.
-
-### Reusability
-
-- Components like buttons, forms, and modals are created for reuse.
-- Custom hooks handle specific logic to avoid duplication.
+5. **Build the application for production:**
+   ```bash
+   npm run build
+   ```
 
 ## Usage
 
-1. **Register** as a new user to gain access to the dashboard.
-2. **Login** with your registered credentials.
-3. View the **charts** and interact with the visualized data.
-4. Navigate through the **dashboard** using the provided routes.
+1. **Registration and Login:**
 
-## Scripts
+   - Users must register and log in to access the dashboard.
+   - Upon successful login, a token is stored and used for API requests.
 
-- `npm start`: Starts the development server.
-- `npm run build`: Builds the app for production.
-- `npm test`: Runs tests (if applicable).
+2. **Dashboard:**
 
-## Dependencies
+   - Displays charts for visualizing data.
+   - Handles loading and error states gracefully.
 
-- `react`
-- `react-chartjs-2`
-- `redux`
-- `react-redux`
-- `react-router-dom`
-- `axios`
+3. **Routing:**
 
-## Future Enhancements
+   - Dashboard and other routes are protected.
+   - Unauthorized users are redirected to the login page.
 
-- Add more chart types and customization options.
-- Implement server-side authentication with token refresh.
-- Add unit and integration tests for better reliability.
+4. **404 Page:**
+   - Displays a user-friendly error message for invalid URLs.
 
-## Contributing
+## Key Patterns and Practices
 
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/YourFeature
-   ```
-3. Commit your changes:
-   ```bash
-   git commit -m "Add YourFeature"
-   ```
-4. Push to the branch:
-   ```bash
-   git push origin feature/YourFeature
-   ```
-5. Open a Pull Request.
+- **HOC:** Reusable logic for protected routes.
+- **Custom Hooks:** Encapsulation of complex logic, such as fetching data.
+- **Custom Axios Instance:** Centralized configuration for API calls, including interceptors for error handling.
+- **Tailwind CSS:** Modern, utility-first styling.
+- **Toast Notifications:** Real-time feedback for user actions.
+
+## Libraries Used
+
+| Library         | Purpose                                |
+| --------------- | -------------------------------------- |
+| Vite            | Fast build tool for React applications |
+| Tailwind CSS    | Styling                                |
+| Redux           | State management                       |
+| Axios           | API handling                           |
+| Formik          | Form management                        |
+| Yup             | Form validation schema                 |
+| react-toastify  | Notifications                          |
+| react-chartjs-2 | Chart rendering                        |
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
-
-## Contact
-
-For any queries or feedback, feel free to contact:
-
-- **Name:** Subroto Chakraborty
-- **Email:** [your-email@example.com]
-- **GitHub:** [your-github-profile]
-
----
-
-**Happy Coding!**
+This project is licensed under the MIT License.
