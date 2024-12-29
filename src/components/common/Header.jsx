@@ -6,7 +6,7 @@ const Header = () => {
   const logout = () => {
     // remove loginedUser from local storage
 
-    localStorage.removeItem("loggedInUser"); // remove loggedIn user
+    localStorage.removeItem("loggedInUserName"); // remove loggedIn user
     localStorage.removeItem("loggedInUserEmail"); // remove loggedIn user
     toast.success("Logged Out");
 
