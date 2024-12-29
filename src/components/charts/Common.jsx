@@ -51,8 +51,6 @@ const Common = () => {
     };
   }, []);
 
-  console.log(chartRef, "chartRef");
-
   const postMap = {};
 
   chartResponse.forEach((comment) => {

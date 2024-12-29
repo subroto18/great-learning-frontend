@@ -33,9 +33,7 @@ const Register = () => {
       // run first time
       localStorage.setItem("auth", JSON.stringify([values]));
       toast.success("Registration successful");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <Formik

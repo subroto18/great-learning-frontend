@@ -32,7 +32,6 @@ const Login = () => {
         toast.warning("User not found! Register first");
       }
     } catch (err) {
-      console.log(err);
       toast.error("Something went wrong while login");
     }
   };
