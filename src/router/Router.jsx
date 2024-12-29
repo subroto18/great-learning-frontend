@@ -4,6 +4,7 @@ import Error from "../pages/Error";
 import Layout from "../Layout";
 import AuthPage from "../pages/Auth";
 import ProtectedRoute from "../ProtectedRoute";
+import NotFoundPage from "../pages/404";
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -25,6 +26,10 @@ const Router = () => {
           element: <AuthPage />,
         },
       ],
+    },
+    {
+      path: "*",
+      element: <NotFoundPage />,
     },
   ]);
 

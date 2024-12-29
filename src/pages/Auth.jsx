@@ -3,7 +3,7 @@ import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import { useDispatch, useSelector } from "react-redux";
 import { store } from "../store";
-import { LOGIN, REGISTER } from "../utils/auth";
+import { LOGIN, REGISTER } from "../utils/helper";
 import { setActiveTabe } from "../slices/authSlice";
 import { Navigate, useNavigate } from "react-router-dom";
 

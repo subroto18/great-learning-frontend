@@ -9,10 +9,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import api from "../../api/api";
-import { asyncChartData } from "../../slices/chartSlice";
+
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../../store";
 
 ChartJS.register(
   CategoryScale,
@@ -27,25 +25,37 @@ const BarChart = () => {
   const dispatch = useDispatch();
   const {
     loading,
-    data: chartData,
+    data: chartResponse,
     error,
+    active,
   } = useSelector((store) => store.chart);
 
-  const labels = Array.from({ length: 200 }, (_, i) => `Item ${i + 1}`);
-  const data = Array.from({ length: 200 }, () =>
-    Math.floor(Math.random() * 100)
-  );
+  const postEmailMap = {};
 
-  useEffect(() => {
-    dispatch(asyncChartData()); // api call
-  }, []);
+  chartResponse.forEach((comment) => {
+    const key = `${comment.postId}-${comment.email}`;
+    if (postEmailMap[key]) {
+      postEmailMap[key]++;
+    } else {
+      postEmailMap[key] = 1;
+    }
+  });
+
+  // Prepare the data for the chart
+  const labels = Object.keys(postEmailMap);
+  const counts = Object.values(postEmailMap);
+
+  // const labels = chartResponse?.map((item) => `Item ${item.postId}`);
+  // const data = chartResponse?.map((item) => `Item ${item.email}`);
 
   const chartData = {
-    labels: labels,
+    labels: labels, // X-axis labels
+
     datasets: [
       {
-        label: "Dataset 1",
-        data: data,
+        label: "Comments per Post & Email",
+
+        data: counts, // Y-axis data points
         backgroundColor: "rgba(75, 192, 192, 0.5)",
         borderColor: "rgba(75, 192, 192, 1)",
         borderWidth: 1,
@@ -61,7 +71,12 @@ const BarChart = () => {
       },
       title: {
         display: true,
-        text: "Interactive Bar Chart",
+        text: "Interactive Chart",
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true, // Start the Y-axis from zero
       },
     },
   };

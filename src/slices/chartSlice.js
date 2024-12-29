@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import api from "../api/api";
+import { BAR } from "../utils/helper";
 
 export const asyncChartData = createAsyncThunk(
   "user/fetchUserData",
@@ -8,7 +9,8 @@ export const asyncChartData = createAsyncThunk(
       const response = await api.get(
         `https://jsonplaceholder.typicode.com/comments`
       );
-      if (!response.ok) {
+
+      if (response.status !== 200) {
         // Throw an error for non-200 responses
         throw new Error("Failed to fetch user data");
       }
@@ -27,8 +29,13 @@ const chartSlice = createSlice({
     loading: false,
     data: [],
     error: "",
+    activeChart: BAR,
   },
-  reducers: {},
+  reducers: {
+    setActiveChart: (state, action) => {
+      state.activeChart = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(asyncChartData.pending, (state) => {
@@ -46,4 +53,5 @@ const chartSlice = createSlice({
   },
 });
 
+export const { setActiveChart } = chartSlice.actions;
 export default chartSlice.reducer;

@@ -1,10 +1,9 @@
-import React from "react";
-import BarChart from "../charts/BarChart";
+import Charts from "../charts/Charts";
 
 const Body = () => {
   return (
     <main className="flex-1 p-4 bg-gray-100">
-      <BarChart />
+      <Charts />
     </main>
   );
 };
