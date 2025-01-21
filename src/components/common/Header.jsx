@@ -22,10 +22,7 @@ const Header = () => {
       {/* Logo */}
       <div className="text-lg md:text-2xl font-bold">
         <a href="/" className="hover:underline">
-          <img
-            className="w-[10rem]"
-            src={"https://influencerlabs.in/assets/img/logo.png"}
-          />
+          <img className="w-[10rem]" src={""} />
         </a>
       </div>
 

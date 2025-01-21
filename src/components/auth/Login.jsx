@@ -1,36 +1,18 @@
 import { Formik, Form } from "formik";
 import loginValidationSchema from "../../validation/login";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Input from "../InputFields/Input";
-import { useNavigate } from "react-router-dom";
+
+import { asyncLogin } from "../../slices/authSlice";
 
 const Login = () => {
   const { loginFormData } = useSelector((store) => store.auth);
-
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    let crediential = JSON.parse(localStorage.getItem("auth"));
-
     try {
-      if (crediential) {
-        const loggedInUser = crediential?.filter(
-          (item) =>
-            item.email === values.email && item.password === values.password
-        );
-
-        if (loggedInUser?.length > 0) {
-          localStorage.setItem("loggedInUserName", loggedInUser?.[0]?.name); // set login user in local storage
-          localStorage.setItem("loggedInUserEmail", values.email); // set login user in local storage
-          toast.success("Logedin successful");
-          navigate("/"); // redirect to home after login
-        } else {
-          toast.warning("User not found! Register first");
-        }
-      } else {
-        toast.warning("User not found! Register first");
-      }
+      dispatch(asyncLogin(values));
     } catch (err) {
       toast.error("Something went wrong while login");
     }

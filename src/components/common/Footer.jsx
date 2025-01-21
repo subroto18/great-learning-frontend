@@ -4,8 +4,8 @@ const Footer = () => {
       <p className="text-sm md:text-base">
         © Copyright{" "}
         <strong>
-          <a target="_blank" href="https://influencerlabs.in/">
-            Influencer Labs{" "}
+          <a target="_blank" href="/">
+            Great learning{" "}
           </a>
         </strong>
         . All Rights Reserved.

@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from "react";
 import Login from "../components/auth/Login";
 import Register from "../components/auth/Register";
 import { useDispatch, useSelector } from "react-redux";
-import { store } from "../store";
+
 import { LOGIN, REGISTER } from "../utils/helper";
 import { setActiveTabe } from "../slices/authSlice";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const AuthPage = () => {
-  const { activeTab } = useSelector((store) => store.auth);
+  const { activeTab, isAuthorized } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
-  const token = localStorage.getItem("user");
-
-  if (token) return <Navigate to="/" />; // if user login , do not show auth page
+  if (isAuthorized) return <Navigate to="/" />; // if user login , do not show auth page
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">

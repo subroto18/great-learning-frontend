@@ -1,40 +1,25 @@
 import { Formik, Form } from "formik";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 import Input from "../InputFields/Input";
 import registerValidationSchema from "../../validation/register";
+import { asyncRegister } from "../../slices/authSlice";
 
 const Register = () => {
   const { registerFormData } = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
     try {
-      let crediential = JSON.parse(localStorage.getItem("auth"));
-
-      if (crediential) {
-        // if local storage exist
-
-        const isUserExist = crediential?.filter(
-          (item) => item.email === values.email
-        );
-        if (isUserExist?.length > 0) {
-          toast.warning("Email already registered");
-          return;
-        } else {
-          const newCrediential = [...crediential, values];
-          localStorage.setItem("auth", JSON.stringify(newCrediential));
-          toast.success("Registration successful");
-          return;
-        }
-      }
-
-      // run first time
-      localStorage.setItem("auth", JSON.stringify([values]));
-      toast.success("Registration successful");
-    } catch (error) {}
+      dispatch(asyncRegister(values));
+    } catch (error) {
+      toast.error("Something went wrong while register!");
+      console.log(error);
+    }
   };
+
   return (
     <Formik
       initialValues={registerFormData}
